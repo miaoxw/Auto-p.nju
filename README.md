@@ -8,6 +8,7 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 * Save username and password  
 *Multi-user support is of course unnecessary, isn't it?*
 * Show login state
+
 ##To-do List
 * Seperate the login process to a new thread to speed up
 * Develop a GUI-less version, such as a Windows service
