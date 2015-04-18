@@ -12,4 +12,7 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 ##To-do List
 * Seperate the login process to a new thread to speed up
 * Develop a GUI-less version, such as a Windows service
- 
+
+##See Also
+* [Mac OS](https://github.com/Cee/PNJU-TodayWidget)
+* [iOS&Apple Watch](https://github.com/Cee/PNJU-Watch)
