@@ -24,13 +24,17 @@ namespace Auto_p.nju_desktop
 			textBoxUsername.Text = Properties.Settings.Default.username;
 			textBoxPassword.Text = Properties.Settings.Default.password;
 
-			if(Properties.Settings.Default.autoLogin)
+			OnlineMessage onlineState = OnlineState.getOnlineState();
+			GlobalFunction.showInfo(onlineState, this);
+
+			if (Properties.Settings.Default.autoLogin&&onlineState.reply_code!=401)
+			//301->已登录
 			{
 				ReturnMessage ret = null;
 				do
 				{
 					ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
-				} while (ret==null);
+				} while (ret == null);
 				GlobalFunction.showInfo(ret, this);
 				this.WindowState = FormWindowState.Minimized;
 			}
@@ -78,6 +82,13 @@ namespace Auto_p.nju_desktop
 		private void buttonLogin_Click(object sender, EventArgs e)
 		{
 			saveOptions();
+
+			if(textBoxUsername.Text.Equals("")||textBoxPassword.Text.Equals(""))
+			{
+				MessageBox.Show("用户名和密码不能为空！", "Auto p.nju", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
 			if (checkBoxAutoLogin.Checked)
 				saveUsernameAndPassword();
 			else
@@ -92,8 +103,32 @@ namespace Auto_p.nju_desktop
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
-			ReturnMessage ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
-			GlobalFunction.showInfo(ret, this);
+			OnlineMessage onlineState = OnlineState.getOnlineState();
+			GlobalFunction.showInfo(onlineState, this);
+
+			if (onlineState.reply_code != 301)//未登录
+			{
+				ReturnMessage ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
+				GlobalFunction.showInfo(ret, this);
+			}
+		}
+
+		private void checkBoxAutoLogin_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.autoLogin = checkBoxAutoLogin.Checked;
+			if(checkBoxAutoLogin.Checked)
+			{
+				saveUsernameAndPassword();
+			}
+			else
+			{
+				clearUsernameAndPassword();
+			}
+		}
+
+		private void checkBoxReconnectOnFail_CheckedChanged(object sender, EventArgs e)
+		{
+			Properties.Settings.Default.autoReconnect = checkBoxReconnectOnFail.Checked;
 		}
 	}
 }

@@ -22,6 +22,18 @@ namespace Auto_p.nju_desktop
 			form.labelUsernameValue.Text = message.userinfo.username;
 		}
 
+		public static void showInfo(OnlineMessage message, MainForm form)
+		{
+			form.labelAeraValue.Text = message.userinfo.area_name;
+
+			form.labelIPValue.Text = message.userinfo.user_ip;
+			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime * 1000);
+			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
+			form.labelNameValue.Text = message.userinfo.fullname;
+			form.labelPayAmountValue.Text = message.userinfo.payamount.ToString("#.00");
+			form.labelUsernameValue.Text = message.userinfo.username;
+		}
+
 		public static DateTime unixTimestamp2DateTime(long timeStamp)
 		{
 			DateTime time = DateTime.MinValue;

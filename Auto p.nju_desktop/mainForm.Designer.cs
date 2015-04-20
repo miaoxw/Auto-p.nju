@@ -99,6 +99,7 @@
 			this.checkBoxAutoLogin.TabIndex = 4;
 			this.checkBoxAutoLogin.Text = "以后自动登录并最小化";
 			this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+			this.checkBoxAutoLogin.CheckedChanged += new System.EventHandler(this.checkBoxAutoLogin_CheckedChanged);
 			// 
 			// buttonLogin
 			// 
@@ -119,6 +120,7 @@
 			this.checkBoxReconnectOnFail.TabIndex = 7;
 			this.checkBoxReconnectOnFail.Text = "断线重连";
 			this.checkBoxReconnectOnFail.UseVisualStyleBackColor = true;
+			this.checkBoxReconnectOnFail.CheckedChanged += new System.EventHandler(this.checkBoxReconnectOnFail_CheckedChanged);
 			// 
 			// notifyIcon
 			// 
