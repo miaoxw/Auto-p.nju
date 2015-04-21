@@ -25,10 +25,11 @@ namespace Auto_p.nju_desktop
 			textBoxPassword.Text = Properties.Settings.Default.password;
 
 			OnlineMessage onlineState = OnlineState.getOnlineState();
-			GlobalFunction.showInfo(onlineState, this);
+			if(onlineState.reply_code==401)
+				GlobalFunction.showInfo(onlineState, this);
 
-			if (Properties.Settings.Default.autoLogin&&onlineState.reply_code!=401)
-			//301->已登录
+			if (Properties.Settings.Default.autoLogin && onlineState.reply_code != 301 && !textBoxUsername.Text.Equals("") && !textBoxPassword.Text.Equals(""))
+			//301->已登录!
 			{
 				ReturnMessage ret = null;
 				do
