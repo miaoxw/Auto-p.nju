@@ -13,7 +13,7 @@ namespace Auto_p.nju_desktop
 			form.labelAeraValue.Text = message.userinfo.area_name;
 
 			uint IPUint = message.userinfo.userip;
-			String frnendlyIPAddress = ((IPUint >> 24) & 0xFF) + "." + ((IPUint >> 16) & 0xFF) + "." + ((IPUint >> 8) & 0xFF) + "." + ((IPUint >> 8) & 0xFF);
+			String frnendlyIPAddress = ((IPUint >> 24) & 0xFF) + "." + ((IPUint >> 16) & 0xFF) + "." + ((IPUint >> 8) & 0xFF) + "." + (IPUint & 0xFF);
 			form.labelIPValue.Text = frnendlyIPAddress;
 			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime*1000);
 			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();

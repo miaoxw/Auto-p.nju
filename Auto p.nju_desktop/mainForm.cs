@@ -131,5 +131,11 @@ namespace Auto_p.nju_desktop
 		{
 			Properties.Settings.Default.autoReconnect = checkBoxReconnectOnFail.Checked;
 		}
+
+		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			saveOptions();
+			saveUsernameAndPassword();
+		}
 	}
 }

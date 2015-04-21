@@ -277,6 +277,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Auto p.nju by 喵叔";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
 			this.Load += new System.EventHandler(this.mainForm_Load);
 			this.SizeChanged += new System.EventHandler(this.mainForm_SizeChanged);
 			this.groupBox.ResumeLayout(false);
