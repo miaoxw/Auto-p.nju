@@ -9,6 +9,11 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 *Multi-user support is of course unnecessary, isn't it?*
 * Show login state
 
+##Update Log
+###2015-06-13
+* Update this tool according to the change of log in methods made by NIC
+* Fixed the problems that auto log in works malfunctionally
+
 ##To-do List
 * Seperate the login process to a new thread to speed up
 * Develop a GUI-less version, such as a Windows service

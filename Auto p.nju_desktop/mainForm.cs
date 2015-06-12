@@ -19,24 +19,27 @@ namespace Auto_p.nju_desktop
 
 		private void mainForm_Load(object sender, EventArgs e)
 		{
-			checkBoxAutoLogin.Checked = Properties.Settings.Default.autoLogin;
-			checkBoxReconnectOnFail.Checked = Properties.Settings.Default.autoReconnect;
 			textBoxUsername.Text = Properties.Settings.Default.username;
 			textBoxPassword.Text = Properties.Settings.Default.password;
+			checkBoxAutoLogin.Checked = Properties.Settings.Default.autoLogin;
+			checkBoxReconnectOnFail.Checked = Properties.Settings.Default.autoReconnect;			
 
 			OnlineMessage onlineState = OnlineState.getOnlineState();
-			if(onlineState.reply_code==401)
+			if(onlineState.reply_code==3010101)
 				GlobalFunction.showInfo(onlineState, this);
 
-			if (Properties.Settings.Default.autoLogin && onlineState.reply_code != 301 && !textBoxUsername.Text.Equals("") && !textBoxPassword.Text.Equals(""))
-			//301->已登录!
+			if (checkBoxAutoLogin.Checked)
 			{
-				ReturnMessage ret = null;
-				do
+				if (onlineState.reply_code != 3010101 && !textBoxUsername.Text.Equals("") && !textBoxPassword.Text.Equals(""))
+				//3010101->已登录!
 				{
-					ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
-				} while (ret == null);
-				GlobalFunction.showInfo(ret, this);
+					OnlineMessage ret = null;
+					do
+					{
+						ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
+					} while (ret == null);
+					GlobalFunction.showInfo(ret, this);
+				}
 				this.WindowState = FormWindowState.Minimized;
 			}
 			if (Properties.Settings.Default.autoReconnect)
@@ -94,12 +97,12 @@ namespace Auto_p.nju_desktop
 				saveUsernameAndPassword();
 			else
 				clearUsernameAndPassword();
-			ReturnMessage ret = null;
+			OnlineMessage ret = null;
 			do
 			{
 				ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
 			} while (ret == null);
-			GlobalFunction.showInfo(ret, this);
+			GlobalFunction.showInfo(OnlineState.getOnlineState(), this);
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -107,9 +110,9 @@ namespace Auto_p.nju_desktop
 			OnlineMessage onlineState = OnlineState.getOnlineState();
 			GlobalFunction.showInfo(onlineState, this);
 
-			if (onlineState.reply_code != 301)//未登录
+			if (onlineState.reply_code == 3010105)//未登录
 			{
-				ReturnMessage ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
+				OnlineMessage ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
 				GlobalFunction.showInfo(ret, this);
 			}
 		}

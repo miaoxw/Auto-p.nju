@@ -12,11 +12,11 @@ namespace Auto_p.nju_desktop
 {
 	class AutoConnect
 	{
-		public static ReturnMessage connect(String username,String password)
+		public static OnlineMessage connect(String username,String password)
 		{
-			String postData = "action=login&username=" + username + "&password=" + password;
+			String postData = "username=" + username + "&password=" + password;
 
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://p.nju.edu.cn/portal/portal_io.do");
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://p.nju.edu.cn/portal_io/login");
 			request.Method = "POST";
 			request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
 
@@ -33,7 +33,10 @@ namespace Auto_p.nju_desktop
 				ReturnMessage returnMessage = (ReturnMessage)serializer.ReadObject(responseStream);
 				responseStream.Close();
 
-				return returnMessage;
+				if (returnMessage.reply_code == 1 || returnMessage.reply_code == 6)//登录成功或已登录
+					return OnlineState.getOnlineState();
+				else
+					return null;
 			}
 			catch
 			{
@@ -49,7 +52,7 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal String username;
 		[DataMember]
-		internal uint userip;
+		internal uint useripv4;
 		[DataMember]
 		internal long acctstarttime;
 		[DataMember]
@@ -57,7 +60,7 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal String area_name;
 		[DataMember]
-		internal float payamount;
+		internal float balance;
 	}
 
 	[DataContract]
@@ -66,7 +69,7 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal int reply_code;
 		[DataMember]
-		internal String reply_message;
+		internal String reply_msg;
 		[DataMember]
 		internal UserInfo userinfo;
 	}

@@ -14,7 +14,7 @@ namespace Auto_p.nju_desktop
 	{
 		public static OnlineMessage getOnlineState()
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://p.nju.edu.cn/proxy/userinfo.php");
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://p.nju.edu.cn/portal_io/proxy/userinfo");
 			request.Method = "POST";
 
 			try
@@ -62,6 +62,6 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal String reply_msg;
 		[DataMember]
-		internal UserOnlineInfo userinfo;
+		internal UserOnlineInfo results;
 	}
 }
