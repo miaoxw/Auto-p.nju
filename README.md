@@ -10,6 +10,9 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 * Show login state
 
 ##Update Log
+###2015-06-13(2nd update)
+* Fixed the problem that when BRAS service is auto logged in, Auto p.nju may get the online status of NULL and a NullReferenceException will be raised.
+
 ###2015-06-13
 * Update this tool according to the change of log in methods made by NIC
 * Fixed the problems that auto log in works malfunctionally

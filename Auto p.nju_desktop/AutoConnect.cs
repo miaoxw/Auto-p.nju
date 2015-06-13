@@ -7,6 +7,7 @@ using System.Net;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Threading;
 
 namespace Auto_p.nju_desktop
 {
@@ -34,7 +35,10 @@ namespace Auto_p.nju_desktop
 				responseStream.Close();
 
 				if (returnMessage.reply_code == 1 || returnMessage.reply_code == 6)//登录成功或已登录
+				{
+					Thread.Sleep(1000);
 					return OnlineState.getOnlineState();
+				}
 				else
 					return null;
 			}
