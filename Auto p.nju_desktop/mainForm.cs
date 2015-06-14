@@ -25,12 +25,12 @@ namespace Auto_p.nju_desktop
 			checkBoxReconnectOnFail.Checked = Properties.Settings.Default.autoReconnect;			
 
 			OnlineMessage onlineState = OnlineState.getOnlineState();
-			if(onlineState.reply_code==3010101)
+			if (onlineState.reply_code == 3010101 && onlineState.reply_msg != null)
 				GlobalFunction.showInfo(onlineState, this);
 
 			if (checkBoxAutoLogin.Checked)
 			{
-				if (onlineState.reply_code != 3010101 && !textBoxUsername.Text.Equals("") && !textBoxPassword.Text.Equals(""))
+				if (!textBoxUsername.Text.Equals("") && !textBoxPassword.Text.Equals(""))
 				//3010101->已登录!
 				{
 					OnlineMessage ret = null;
