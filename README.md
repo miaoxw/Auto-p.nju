@@ -10,6 +10,10 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 * Show login state
 
 ##Update Log
+###2015-06-14
+* It seems that the exception raised when tool starts up is not solved?
+
+
 ###2015-06-13(2nd update)
 * Fixed the problem that when BRAS service is auto logged in, Auto p.nju may get the online status of NULL and a NullReferenceException will be raised.
 
