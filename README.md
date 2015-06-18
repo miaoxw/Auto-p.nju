@@ -13,6 +13,7 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 ###2015-06-18
 * The exception dosen't appear any more
 * *But the login speed is decreased*
+
 ###2015-06-14
 * It seems that the exception raised when tool starts up is not solved?
 
