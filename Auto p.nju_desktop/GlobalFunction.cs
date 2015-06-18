@@ -17,21 +17,27 @@ namespace Auto_p.nju_desktop
 			form.labelIPValue.Text = frnendlyIPAddress;
 			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime*1000);
 			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
-			form.labelNameValue.Text = message.userinfo.fullname;
-			form.labelPayAmountValue.Text = message.userinfo.balance.ToString("#.00");
-			form.labelUsernameValue.Text = message.userinfo.username;
+			if (message.userinfo != null)
+			{
+				form.labelNameValue.Text = message.userinfo.fullname;
+				form.labelPayAmountValue.Text = message.userinfo.balance.ToString("#.00");
+				form.labelUsernameValue.Text = message.userinfo.username;
+			}
 		}
 
 		public static void showInfo(OnlineMessage message, MainForm form)
 		{
-			form.labelAeraValue.Text = message.results.area_name;
+			//if (message.results != null)
+			//{
+				form.labelAeraValue.Text = message.results.area_name;
 
-			form.labelIPValue.Text = message.results.user_ip;
-			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.results.acctstarttime * 1000);
-			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
-			form.labelNameValue.Text = message.results.fullname;
-			form.labelPayAmountValue.Text = message.results.payamount.ToString("#.00");
-			form.labelUsernameValue.Text = message.results.username;
+				form.labelIPValue.Text = message.results.user_ip;
+				DateTime time = GlobalFunction.unixTimestamp2DateTime(message.results.acctstarttime * 1000);
+				form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
+				form.labelNameValue.Text = message.results.fullname;
+				form.labelPayAmountValue.Text = message.results.payamount.ToString("#.00");
+				form.labelUsernameValue.Text = message.results.username;
+			//}
 		}
 
 		public static DateTime unixTimestamp2DateTime(long timeStamp)

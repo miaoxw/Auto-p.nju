@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,7 +23,7 @@ namespace Auto_p.nju_desktop
 			textBoxUsername.Text = Properties.Settings.Default.username;
 			textBoxPassword.Text = Properties.Settings.Default.password;
 			checkBoxAutoLogin.Checked = Properties.Settings.Default.autoLogin;
-			checkBoxReconnectOnFail.Checked = Properties.Settings.Default.autoReconnect;			
+			checkBoxReconnectOnFail.Checked = Properties.Settings.Default.autoReconnect;
 
 			OnlineMessage onlineState = OnlineState.getOnlineState();
 			if (onlineState.reply_code == 3010101 && onlineState.reply_msg != null)
@@ -37,7 +38,7 @@ namespace Auto_p.nju_desktop
 					do
 					{
 						ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
-					} while (ret == null);
+					} while (ret == null || ret.results == null);
 					GlobalFunction.showInfo(ret, this);
 				}
 				this.WindowState = FormWindowState.Minimized;
@@ -102,7 +103,9 @@ namespace Auto_p.nju_desktop
 			{
 				ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
 			} while (ret == null);
-			GlobalFunction.showInfo(OnlineState.getOnlineState(), this);
+
+			Thread.Sleep(1000);
+			GlobalFunction.showInfo(OnlineState.getOnlineStateStrict(), this);
 		}
 
 		private void timer_Tick(object sender, EventArgs e)

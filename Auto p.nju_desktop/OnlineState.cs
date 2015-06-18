@@ -19,13 +19,17 @@ namespace Auto_p.nju_desktop
 
 			try
 			{
-				Stream requestStream = request.GetRequestStream();
+				OnlineMessage returnMessage=null;
+				do
+				{
+					Stream requestStream = request.GetRequestStream();
 
-				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-				Stream responseStream = response.GetResponseStream();
-				DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OnlineMessage));
-				OnlineMessage returnMessage = (OnlineMessage)serializer.ReadObject(responseStream);
-				responseStream.Close();
+					HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+					Stream responseStream = response.GetResponseStream();
+					DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(OnlineMessage));
+					returnMessage = (OnlineMessage)serializer.ReadObject(responseStream);
+					responseStream.Close();
+				} while (returnMessage == null);
 
 				return returnMessage;
 			}
@@ -34,6 +38,16 @@ namespace Auto_p.nju_desktop
 
 				return null;
 			}
+		}
+
+		public static OnlineMessage getOnlineStateStrict()
+		{
+			OnlineMessage returnMessage = null;
+			do
+			{
+				returnMessage = getOnlineState();
+			} while (returnMessage == null || returnMessage.results == null);
+			return returnMessage;
 		}
 	}
 

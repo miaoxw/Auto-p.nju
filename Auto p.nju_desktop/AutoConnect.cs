@@ -36,15 +36,13 @@ namespace Auto_p.nju_desktop
 
 				if (returnMessage.reply_code == 1 || returnMessage.reply_code == 6)//登录成功或已登录
 				{
-					Thread.Sleep(1000);
-					return OnlineState.getOnlineState();
+					return OnlineState.getOnlineStateStrict();
 				}
 				else
 					return null;
 			}
 			catch
 			{
-
 				return null;
 			}
 		}
