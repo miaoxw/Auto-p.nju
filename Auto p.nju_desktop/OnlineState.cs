@@ -12,9 +12,14 @@ namespace Auto_p.nju_desktop
 {
 	class OnlineState
 	{
+		public const int OPERATE_SUCCESS = 0;
+		public const int NO_PORTAL_MESSAGE = 2;
+
+		private const String STATE_URL = "http://p.nju.edu.cn/portal_io/getinfo";
+
 		public static OnlineMessage getOnlineState()
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://p.nju.edu.cn/portal_io/proxy/userinfo");
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(STATE_URL);
 			request.Method = "POST";
 
 			try
@@ -46,7 +51,7 @@ namespace Auto_p.nju_desktop
 			do
 			{
 				returnMessage = getOnlineState();
-			} while (returnMessage == null || returnMessage.results == null);
+			} while (returnMessage == null || returnMessage.userinfo == null);
 			return returnMessage;
 		}
 	}
@@ -57,7 +62,7 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal String username;
 		[DataMember]
-		internal String user_ip;
+		internal uint useripv4;
 		[DataMember]
 		internal long acctstarttime;
 		[DataMember]
@@ -65,7 +70,7 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal String area_name;
 		[DataMember]
-		internal float payamount;
+		internal int balance;
 	}
 
 	[DataContract]
@@ -76,6 +81,6 @@ namespace Auto_p.nju_desktop
 		[DataMember]
 		internal String reply_msg;
 		[DataMember]
-		internal UserOnlineInfo results;
+		internal UserOnlineInfo userinfo;
 	}
 }

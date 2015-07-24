@@ -10,6 +10,10 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 * Show login state
 
 ##Update Log
+###2015-07-25
+* Update login logic according to the change of log-in methods made by NIC  
+PS: This change is really awful...
+
 ###2015-06-18
 * The exception dosen't appear any more
 * *But the login speed is decreased*

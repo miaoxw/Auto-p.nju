@@ -26,19 +26,18 @@ namespace Auto_p.nju_desktop
 			checkBoxReconnectOnFail.Checked = Properties.Settings.Default.autoReconnect;
 
 			OnlineMessage onlineState = OnlineState.getOnlineState();
-			if (onlineState.reply_code == 3010101 && onlineState.reply_msg != null)
+			if (onlineState.reply_code == OnlineState.OPERATE_SUCCESS && onlineState.reply_msg != null)
 				GlobalFunction.showInfo(onlineState, this);
 
 			if (checkBoxAutoLogin.Checked)
 			{
 				if (!textBoxUsername.Text.Equals("") && !textBoxPassword.Text.Equals(""))
-				//3010101->已登录!
 				{
 					OnlineMessage ret = null;
 					do
 					{
 						ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
-					} while (ret == null || ret.results == null);
+					} while (ret == null || ret.userinfo == null);
 					GlobalFunction.showInfo(ret, this);
 				}
 				this.WindowState = FormWindowState.Minimized;
@@ -81,6 +80,7 @@ namespace Auto_p.nju_desktop
 		{
 			this.Show();
 			this.WindowState = FormWindowState.Normal;
+			this.Focus();
 			notifyIcon.Visible = false;
 		}
 
@@ -113,7 +113,7 @@ namespace Auto_p.nju_desktop
 			OnlineMessage onlineState = OnlineState.getOnlineState();
 			GlobalFunction.showInfo(onlineState, this);
 
-			if (onlineState.reply_code == 3010105)//未登录
+			if (onlineState.reply_code == OnlineState.NO_PORTAL_MESSAGE)//未登录
 			{
 				OnlineMessage ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
 				GlobalFunction.showInfo(ret, this);
@@ -142,6 +142,15 @@ namespace Auto_p.nju_desktop
 		{
 			saveOptions();
 			saveUsernameAndPassword();
+		}
+
+		private void MainForm_Resize(object sender, EventArgs e)
+		{
+			if (this.WindowState == FormWindowState.Minimized)
+			{
+				notifyIcon.Visible = true;
+				this.Hide();
+			}
 		}
 	}
 }

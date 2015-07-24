@@ -39,7 +39,7 @@
 			this.checkBoxReconnectOnFail = new System.Windows.Forms.CheckBox();
 			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.groupBox = new System.Windows.Forms.GroupBox();
-			this.labelPayAmountValue = new System.Windows.Forms.Label();
+			this.labelBalanceValue = new System.Windows.Forms.Label();
 			this.labelLoginTimeValue = new System.Windows.Forms.Label();
 			this.labelAeraValue = new System.Windows.Forms.Label();
 			this.labelIPValue = new System.Windows.Forms.Label();
@@ -130,7 +130,7 @@
 			// 
 			// groupBox
 			// 
-			this.groupBox.Controls.Add(this.labelPayAmountValue);
+			this.groupBox.Controls.Add(this.labelBalanceValue);
 			this.groupBox.Controls.Add(this.labelLoginTimeValue);
 			this.groupBox.Controls.Add(this.labelAeraValue);
 			this.groupBox.Controls.Add(this.labelIPValue);
@@ -149,13 +149,13 @@
 			this.groupBox.TabStop = false;
 			this.groupBox.Text = "登录信息";
 			// 
-			// labelPayAmountValue
+			// labelBalanceValue
 			// 
-			this.labelPayAmountValue.AutoSize = true;
-			this.labelPayAmountValue.Location = new System.Drawing.Point(97, 147);
-			this.labelPayAmountValue.Name = "labelPayAmountValue";
-			this.labelPayAmountValue.Size = new System.Drawing.Size(0, 12);
-			this.labelPayAmountValue.TabIndex = 11;
+			this.labelBalanceValue.AutoSize = true;
+			this.labelBalanceValue.Location = new System.Drawing.Point(97, 147);
+			this.labelBalanceValue.Name = "labelBalanceValue";
+			this.labelBalanceValue.Size = new System.Drawing.Size(0, 12);
+			this.labelBalanceValue.TabIndex = 11;
 			// 
 			// labelLoginTimeValue
 			// 
@@ -280,6 +280,7 @@
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
 			this.Load += new System.EventHandler(this.mainForm_Load);
 			this.SizeChanged += new System.EventHandler(this.mainForm_SizeChanged);
+			this.Resize += new System.EventHandler(this.MainForm_Resize);
 			this.groupBox.ResumeLayout(false);
 			this.groupBox.PerformLayout();
 			this.ResumeLayout(false);
@@ -305,7 +306,7 @@
 		private System.Windows.Forms.Label labelName;
 		private System.Windows.Forms.Label labelUsername2;
 		private System.Windows.Forms.Timer timer;
-		internal System.Windows.Forms.Label labelPayAmountValue;
+		internal System.Windows.Forms.Label labelBalanceValue;
 		internal System.Windows.Forms.Label labelLoginTimeValue;
 		internal System.Windows.Forms.Label labelAeraValue;
 		internal System.Windows.Forms.Label labelIPValue;

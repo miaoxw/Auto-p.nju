@@ -8,7 +8,8 @@ namespace Auto_p.nju_desktop
 {
 	class GlobalFunction
 	{
-		public static void showInfo(ReturnMessage message,MainForm form)
+		//There's nowhere to use this function now, but stay it here in case.
+		private static void showInfo(ReturnMessage message,MainForm form)
 		{
 			form.labelAeraValue.Text = message.userinfo.area_name;
 
@@ -20,24 +21,23 @@ namespace Auto_p.nju_desktop
 			if (message.userinfo != null)
 			{
 				form.labelNameValue.Text = message.userinfo.fullname;
-				form.labelPayAmountValue.Text = message.userinfo.balance.ToString("#.00");
+				form.labelBalanceValue.Text = message.userinfo.balance.ToString("#.00");
 				form.labelUsernameValue.Text = message.userinfo.username;
 			}
 		}
 
 		public static void showInfo(OnlineMessage message, MainForm form)
 		{
-			//if (message.results != null)
-			//{
-				form.labelAeraValue.Text = message.results.area_name;
+			form.labelAeraValue.Text = message.userinfo.area_name;
 
-				form.labelIPValue.Text = message.results.user_ip;
-				DateTime time = GlobalFunction.unixTimestamp2DateTime(message.results.acctstarttime * 1000);
-				form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
-				form.labelNameValue.Text = message.results.fullname;
-				form.labelPayAmountValue.Text = message.results.payamount.ToString("#.00");
-				form.labelUsernameValue.Text = message.results.username;
-			//}
+			form.labelIPValue.Text = UintIP2String(message.userinfo.useripv4);
+			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime * 1000);
+			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
+			form.labelNameValue.Text = message.userinfo.fullname;
+			String balance = message.userinfo.balance / 100 + ".";
+			balance += message.userinfo.balance % 100 < 10 ? ("0" + (message.userinfo.balance % 100).ToString()) : (message.userinfo.balance % 100).ToString();
+			form.labelBalanceValue.Text = balance;
+			form.labelUsernameValue.Text = message.userinfo.username;
 		}
 
 		public static DateTime unixTimestamp2DateTime(long timeStamp)
@@ -48,6 +48,10 @@ namespace Auto_p.nju_desktop
 			return time;
 		}
 
-
+		public static String UintIP2String(uint IPUint)
+		{
+			String friendlyIPAddress = ((IPUint >> 24) & 0xFF) + "." + ((IPUint >> 16) & 0xFF) + "." + ((IPUint >> 8) & 0xFF) + "." + (IPUint & 0xFF);
+			return friendlyIPAddress;
+		}
 	}
 }

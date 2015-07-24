@@ -13,11 +13,16 @@ namespace Auto_p.nju_desktop
 {
 	class AutoConnect
 	{
+		public const int LOGIN_SUCCESS = 1;
+		public const int ALREADY_LOGGED_IN = 6;
+
+		private const String LOGIN_URL = "http://p.nju.edu.cn/portal_io/login";
+
 		public static OnlineMessage connect(String username,String password)
 		{
 			String postData = "username=" + username + "&password=" + password;
 
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://p.nju.edu.cn/portal_io/login");
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(LOGIN_URL);
 			request.Method = "POST";
 			request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
 
@@ -34,7 +39,7 @@ namespace Auto_p.nju_desktop
 				ReturnMessage returnMessage = (ReturnMessage)serializer.ReadObject(responseStream);
 				responseStream.Close();
 
-				if (returnMessage.reply_code == 1 || returnMessage.reply_code == 6)//登录成功或已登录
+				if (returnMessage.reply_code == LOGIN_SUCCESS || returnMessage.reply_code == ALREADY_LOGGED_IN)
 				{
 					return OnlineState.getOnlineStateStrict();
 				}
