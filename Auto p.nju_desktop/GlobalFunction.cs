@@ -9,14 +9,14 @@ namespace Auto_p.nju_desktop
 	class GlobalFunction
 	{
 		//There's nowhere to use this function now, but stay it here in case.
-		private static void showInfo(ReturnMessage message,MainForm form)
+		private static void showInfo(ReturnMessage message, MainForm form)
 		{
 			form.labelAeraValue.Text = message.userinfo.area_name;
 
 			uint IPUint = message.userinfo.useripv4;
 			String frnendlyIPAddress = ((IPUint >> 24) & 0xFF) + "." + ((IPUint >> 16) & 0xFF) + "." + ((IPUint >> 8) & 0xFF) + "." + (IPUint & 0xFF);
 			form.labelIPValue.Text = frnendlyIPAddress;
-			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime*1000);
+			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime * 1000);
 			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
 			if (message.userinfo != null)
 			{
@@ -28,16 +28,31 @@ namespace Auto_p.nju_desktop
 
 		public static void showInfo(OnlineMessage message, MainForm form)
 		{
-			form.labelAeraValue.Text = message.userinfo.area_name;
+			if (message != null && message.userinfo != null)
+			{
+				form.labelAeraValue.Text = message.userinfo.area_name;
 
-			form.labelIPValue.Text = UintIP2String(message.userinfo.useripv4);
-			DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime * 1000);
-			form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
-			form.labelNameValue.Text = message.userinfo.fullname;
-			String balance = message.userinfo.balance / 100 + ".";
-			balance += message.userinfo.balance % 100 < 10 ? ("0" + (message.userinfo.balance % 100).ToString()) : (message.userinfo.balance % 100).ToString();
-			form.labelBalanceValue.Text = balance;
-			form.labelUsernameValue.Text = message.userinfo.username;
+				form.labelIPValue.Text = UintIP2String(message.userinfo.useripv4);
+				DateTime time = GlobalFunction.unixTimestamp2DateTime(message.userinfo.acctstarttime * 1000);
+				form.labelLoginTimeValue.Text = time.ToLocalTime().ToString();
+				form.labelNameValue.Text = message.userinfo.fullname;
+				String balance = message.userinfo.balance / 100 + ".";
+				balance += message.userinfo.balance % 100 < 10 ? ("0" + (message.userinfo.balance % 100).ToString()) : (message.userinfo.balance % 100).ToString();
+				form.labelBalanceValue.Text = balance;
+				form.labelUsernameValue.Text = message.userinfo.username;
+			}
+			else
+			{
+				if (message.reply_code == AutoConnect.INVALID_PASSWORD)
+					form.labelUsernameValue.Text = "密码错误";
+				else
+					form.labelUsernameValue.Text = "未登录";
+				form.labelNameValue.Text = "";
+				form.labelIPValue.Text = "";
+				form.labelAeraValue.Text = "";
+				form.labelLoginTimeValue.Text = "";
+				form.labelBalanceValue.Text = "";
+			}
 		}
 
 		public static DateTime unixTimestamp2DateTime(long timeStamp)

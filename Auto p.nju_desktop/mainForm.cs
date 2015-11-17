@@ -104,8 +104,16 @@ namespace Auto_p.nju_desktop
 				ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
 			} while (ret == null);
 
-			Thread.Sleep(1000);
-			GlobalFunction.showInfo(OnlineState.getOnlineStateStrict(), this);
+			if (ret.reply_code == AutoConnect.INVALID_PASSWORD)
+			{
+				timer.Enabled = false;
+				MessageBox.Show("密码错误！", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			else
+			{
+				Thread.Sleep(1000);
+				GlobalFunction.showInfo(OnlineState.getOnlineStateStrict(), this);
+			}
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -115,7 +123,11 @@ namespace Auto_p.nju_desktop
 
 			if (onlineState.reply_code == OnlineState.NO_PORTAL_MESSAGE)//未登录
 			{
-				OnlineMessage ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
+				OnlineMessage ret=null;
+				if (Properties.Settings.Default.username == "" || Properties.Settings.Default.password == "")
+					ret = AutoConnect.connect(Properties.Settings.Default.username, Properties.Settings.Default.password);
+				else
+					ret = AutoConnect.connect(textBoxUsername.Text, textBoxPassword.Text);
 				GlobalFunction.showInfo(ret, this);
 			}
 		}
@@ -136,6 +148,7 @@ namespace Auto_p.nju_desktop
 		private void checkBoxReconnectOnFail_CheckedChanged(object sender, EventArgs e)
 		{
 			Properties.Settings.Default.autoReconnect = checkBoxReconnectOnFail.Checked;
+			timer.Enabled = checkBoxReconnectOnFail.Checked;
 		}
 
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -151,6 +164,12 @@ namespace Auto_p.nju_desktop
 				notifyIcon.Visible = true;
 				this.Hide();
 			}
+		}
+
+		private void stateRefreshTimer_Tick(object sender, EventArgs e)
+		{
+			OnlineMessage onlineState = OnlineState.getOnlineState();
+			GlobalFunction.showInfo(onlineState, this);
 		}
 	}
 }

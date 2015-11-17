@@ -52,6 +52,7 @@
 			this.labelName = new System.Windows.Forms.Label();
 			this.labelUsername2 = new System.Windows.Forms.Label();
 			this.timer = new System.Windows.Forms.Timer(this.components);
+			this.stateRefreshTimer = new System.Windows.Forms.Timer(this.components);
 			this.groupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -144,7 +145,7 @@
 			this.groupBox.Controls.Add(this.labelUsername2);
 			this.groupBox.Location = new System.Drawing.Point(250, 12);
 			this.groupBox.Name = "groupBox";
-			this.groupBox.Size = new System.Drawing.Size(171, 171);
+			this.groupBox.Size = new System.Drawing.Size(179, 171);
 			this.groupBox.TabIndex = 8;
 			this.groupBox.TabStop = false;
 			this.groupBox.Text = "登录信息";
@@ -258,11 +259,17 @@
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
+			// stateRefreshTimer
+			// 
+			this.stateRefreshTimer.Enabled = true;
+			this.stateRefreshTimer.Interval = 30000;
+			this.stateRefreshTimer.Tick += new System.EventHandler(this.stateRefreshTimer_Tick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(433, 195);
+			this.ClientSize = new System.Drawing.Size(440, 195);
 			this.Controls.Add(this.groupBox);
 			this.Controls.Add(this.checkBoxReconnectOnFail);
 			this.Controls.Add(this.buttonLogin);
@@ -312,6 +319,7 @@
 		internal System.Windows.Forms.Label labelIPValue;
 		internal System.Windows.Forms.Label labelNameValue;
 		internal System.Windows.Forms.Label labelUsernameValue;
+		private System.Windows.Forms.Timer stateRefreshTimer;
 	}
 }
 

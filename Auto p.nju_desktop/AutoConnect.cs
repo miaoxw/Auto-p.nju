@@ -14,6 +14,7 @@ namespace Auto_p.nju_desktop
 	class AutoConnect
 	{
 		public const int LOGIN_SUCCESS = 1;
+		public const int INVALID_PASSWORD = 3;
 		public const int ALREADY_LOGGED_IN = 6;
 
 		private const String LOGIN_URL = "http://p.nju.edu.cn/portal_io/login";
@@ -39,12 +40,20 @@ namespace Auto_p.nju_desktop
 				ReturnMessage returnMessage = (ReturnMessage)serializer.ReadObject(responseStream);
 				responseStream.Close();
 
-				if (returnMessage.reply_code == LOGIN_SUCCESS || returnMessage.reply_code == ALREADY_LOGGED_IN)
+				switch(returnMessage.reply_code)
 				{
-					return OnlineState.getOnlineStateStrict();
+					case LOGIN_SUCCESS:
+					case ALREADY_LOGGED_IN:
+						return OnlineState.getOnlineStateStrict();
+					case INVALID_PASSWORD:
+						OnlineMessage onlineMessage = new OnlineMessage();
+						onlineMessage.reply_code = INVALID_PASSWORD;
+						onlineMessage.reply_msg = returnMessage.reply_msg;
+						onlineMessage.userinfo = null;
+						return onlineMessage;
+					default:
+						return null;
 				}
-				else
-					return null;
 			}
 			catch
 			{

@@ -52,10 +52,11 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>AA50BC0F546B9214AB8F4A176009F16240F53650</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>74B94A7BAF7907358447B8DE4B3608070778DAED</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Auto p.nju_desktop_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>

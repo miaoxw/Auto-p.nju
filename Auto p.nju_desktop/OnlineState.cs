@@ -48,10 +48,12 @@ namespace Auto_p.nju_desktop
 		public static OnlineMessage getOnlineStateStrict()
 		{
 			OnlineMessage returnMessage = null;
+			int maxRetry = 0;
 			do
 			{
 				returnMessage = getOnlineState();
-			} while (returnMessage == null || returnMessage.userinfo == null);
+				maxRetry++;
+			} while ((returnMessage == null || returnMessage.userinfo == null) && maxRetry < 5);
 			return returnMessage;
 		}
 	}

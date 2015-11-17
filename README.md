@@ -10,6 +10,11 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 * Show login state
 
 ##Update Log
+###2015-11-17
+* Auto-reconnect works again
+* Fixed the no-responding problem when wrong username/password is input
+* Fixed the UI problem when login time turns to the longest format like `2015/11/17 12:33:18`
+
 ###2015-07-25
 * Update login logic according to the change of log-in methods made by NIC  
 PS: This change is really awful...
