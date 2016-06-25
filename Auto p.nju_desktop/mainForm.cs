@@ -107,8 +107,13 @@ namespace Auto_p.nju_desktop
 			if (ret.reply_code == AutoConnect.INVALID_PASSWORD)
 			{
 				timer.Enabled = false;
-				MessageBox.Show("密码错误！", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ret.reply_msg, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+            //else if(ret.reply_code==AutoConnect.PROCESSING)
+            //{
+            //    timer.Enabled = false;
+            //    MessageBox.Show(ret.reply_msg, "Oops", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
 			else
 			{
 				Thread.Sleep(1000);

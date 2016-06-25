@@ -16,6 +16,7 @@ namespace Auto_p.nju_desktop
 		public const int LOGIN_SUCCESS = 1;
 		public const int INVALID_PASSWORD = 3;
 		public const int ALREADY_LOGGED_IN = 6;
+        public const int PROCESSING = 253;
 
 		private const String LOGIN_URL = "http://p.nju.edu.cn/portal_io/login";
 
@@ -47,11 +48,12 @@ namespace Auto_p.nju_desktop
 						return OnlineState.getOnlineStateStrict();
 					case INVALID_PASSWORD:
 						OnlineMessage onlineMessage = new OnlineMessage();
-						onlineMessage.reply_code = INVALID_PASSWORD;
+						onlineMessage.reply_code = returnMessage.reply_code;
 						onlineMessage.reply_msg = returnMessage.reply_msg;
 						onlineMessage.userinfo = null;
 						return onlineMessage;
-					default:
+                    case PROCESSING:
+                    default:
 						return null;
 				}
 			}
