@@ -10,6 +10,12 @@ If possible, I'll continue to develop this small project ,trying to make it easi
 * Show login state
 
 ##Update Log
+###2016-06-25
+* Update login logic for password policy changes made by NIC
+* More discoveries about different reasons for `Wrong Password`
+
+*I've never thought about updating this application before my graduation as a bachelor... However, this indeed happened.*
+
 ###2015-11-17
 * Auto-reconnect works again
 * Fixed the no-responding problem when wrong username/password is input
