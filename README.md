@@ -45,6 +45,7 @@ PS: This change is really awful...
 * Develop a GUI-less version, such as a Windows service
 
 ##See Also
+* [Android](https://github.com/padeoe/AutoConnect)
 * [Mac OS](https://github.com/Cee/PNJU-TodayWidget)
 * [iOS&Apple Watch](https://github.com/Cee/PNJU-Watch)
 * [Workflow](https://github.com/Cee/PNJU-Workflow)
